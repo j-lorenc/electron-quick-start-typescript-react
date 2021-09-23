@@ -14,16 +14,13 @@ module.exports = merge(baseConfig, {
   devServer: {
     port: 2003,
     compress: true,
-    noInfo: true,
-    stats: 'errors-only',
-    inline: true,
     hot: true,
     headers: { 'Access-Control-Allow-Origin': '*' },
     historyApiFallback: {
       verbose: true,
       disableDotRule: false,
     },
-    before() {
+    onBeforeSetupMiddleware() {
       if (process.env.START_HOT) {
         console.log('Starting main process');
         spawn('npm', ['run', 'start:main'], {
